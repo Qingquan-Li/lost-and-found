@@ -1,0 +1,26 @@
+services:
+  web:
+    build: .
+    ports:
+      # - "80:80" # host:container
+      - "8001:80" # host:container
+    # For production, we would want to build the code into
+    # the image and not mount it from the host
+    # volumes:
+    #   - ./src:/var/www/html
+    #   - ./php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data: {}
