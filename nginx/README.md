@@ -60,10 +60,22 @@ server {
 ```
 
 ## 3. Create a symbolic link to the file in the /etc/nginx/sites-enabled directory:
+
 ```bash
 $ sudo ln -s /etc/nginx/sites-available/lost-and-found /etc/nginx/sites-enabled/
 ```
 
-## 4. Optional: Configure HTTPS
+## 4. Test and reload Nginx:
 
-- Configure Let's Encrypt (certbot) in Nginx to enable HTTPS
+```bash
+# Test the configuration
+$ sudo nginx -t
+
+# Reload Nginx
+$ sudo systemctl reload nginx
+```
+
+## 5. Optional: Configure HTTPS
+
+- ✅ Use Cloudflare DNS proxy to enable HTTPS (it can also enable to hide the IP address of the server)
+- Or: Configure Let's Encrypt (certbot) in Nginx to enable HTTPS

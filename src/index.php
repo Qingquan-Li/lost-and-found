@@ -15,6 +15,7 @@ $result = mysqli_query($dbc, $query);
     <title>BMCC Lost and Found</title>
     <link rel="stylesheet" href="./assets/bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/common.css">
+    <script src="./assets/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <?php include 'navbar.php'; ?>
@@ -25,7 +26,7 @@ $result = mysqli_query($dbc, $query);
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='card mb-3'>";
                 echo "<div class='card-body'>";
-                echo "<h5 class='card-title'>" . htmlspecialchars($row['Title']) . "</h5>";
+                echo "<h5 class='card-title'>" . "[" . htmlspecialchars($row['Type']) . "] " . htmlspecialchars($row['Title']) . "</h5>";
                 if ($row['Image']) {
                     echo "<img
                         src='data:image/jpeg;base64,".base64_encode($row['Image'])."'
@@ -43,7 +44,6 @@ $result = mysqli_query($dbc, $query);
         ?>
     </div>
     
-    <script src="./assets/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </body>
 </html>
