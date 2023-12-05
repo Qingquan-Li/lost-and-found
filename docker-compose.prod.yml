@@ -1,16 +1,12 @@
 services:
   web:
-    build: .
+    image: qingquanli/lost-and-found:latest
+    container_name: lost-and-found # name the container
     ports:
-      # - "80:80" # host:container
       - "8001:80" # host:container
-    # For production, we would want to build the code into
-    # the image and not mount it from the host
-    # volumes:
-    #   - ./src:/var/www/html
-    #   - ./php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - db
+    restart: always # always restart the container if it stops
 
   db:
     image: mysql:8.0
@@ -21,6 +17,7 @@ services:
       MYSQL_PASSWORD: userpassword
     volumes:
       - db_data:/var/lib/mysql
+    restart: always # always restart the container if it stops
 
 volumes:
   db_data: {}

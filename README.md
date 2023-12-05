@@ -17,18 +17,30 @@ This is a web application for lost and found items. Users can post items that th
   - Docker
   - Docker Compose
 
-## 3. Run the project
+## 3. Run the project (production) with Docker
 
-### 3.1 Install Docker and Docker Compose
+1. Install Docker and Docker Compose
 
-- Install Docker: https://docs.docker.com/get-docker/
-- Install Docker Compose: https://docs.docker.com/compose/install/
+Install Docker: https://docs.docker.com/get-docker/  
+Install Docker Compose: https://docs.docker.com/compose/install/
 
-### 3.2 Run Docker Compose
+2. Run the following commands:
+
 ```bash
-# Start Docker (build and run the docker container)
-$ docker-compose up -d
+# Go to the project directory:
+$ cd path/to/lost-and-found
+# Pull the latest images specified in docker-compose.prod.yml:
+$ docker-compose -f docker-compose.prod.yml pull
+# Run the containers with Docker Compose in detached mode:
+$ docker-compose -f docker-compose.prod.yml up -d
+```
 
+## 4. Run the project (development) with Docker
+
+```bash
+# Build and run the docker container in detached mode
+$ docker-compose up -d
+# The project now is running on http://localhost
 # Stop Docker (stop and remove the docker container)
 $ docker-compose down
 ```
