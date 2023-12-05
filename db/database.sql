@@ -17,7 +17,7 @@ CREATE TABLE Items (
     Type ENUM('lost', 'found') NOT NULL,
     Title VARCHAR(255) NOT NULL,
     Description Text,
-    Image BLOB,
+    Image MEDIUMBLOB,
     PostTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (ItemID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)

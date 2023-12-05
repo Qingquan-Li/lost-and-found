@@ -1,6 +1,3 @@
-TODO:
-- logout.php
-
 # Lost and Found
 
 ## 1. About the project

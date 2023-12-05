@@ -8,7 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = mysqli_real_escape_string($dbc, $_POST['password']);
 
     // Prepare the SQL statement
-    $query = "SELECT UserID, Email, Password FROM Users WHERE Email = '$email'";
+    // $query = "SELECT UserID, Email, Password FROM Users WHERE Email = '$email'";
+    // Prepare the SQL statement to include Username
+    $query = "SELECT UserID, Email, Password, Username FROM Users WHERE Email = '$email'";
 
     // Execute the query
     $result = mysqli_query($dbc, $query);
@@ -22,8 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
             $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['Email'] = $row['Email'];
+            // Store Username in session
+            $_SESSION['Username'] = $row['Username'];
 
-            echo "Login successful. <a href='home.php'>Go to home page</a>";
+            // echo "Login successful. <a href='index.php'>Go to home page</a>";
+            // Redirect to home page
+            header("Location: index.php");
         } else {
             echo "Invalid email or password.";
         }

@@ -1,6 +1,6 @@
 # Create MySQL Tables for the Application
 
-## Lost & Found - Entity-Relationship Diagram (ERD)
+## Lost and Found - Entity-Relationship Diagram (ERD)
 
 ```
    [Users]                [Items]                [Comments]

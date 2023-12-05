@@ -2,6 +2,7 @@
 session_start();
 
 // Start output buffering
+// to prevent sending HTTP headers before redirecting to login page (in 10 seconds)
 ob_start();
 
 // Check if the user is logged in, if not then redirect to login page
@@ -26,20 +27,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = mysqli_real_escape_string($dbc, $_POST['description']);
     $userID = $_SESSION['UserID']; // Get UserID from session
 
-    // Handle the image upload
     if (!empty($_FILES["image"]["tmp_name"])) {
-        $image = $_FILES['image']['tmp_name'];
-        $imageContent = addslashes(file_get_contents($image));
+        // Check if the image is larger than 1000KB (1MB)
+        if ($_FILES["image"]["size"] > 1000 * 1024) {
+            echo "The image size should be less than 1MB.";
+        } else {
+            $image = $_FILES['image']['tmp_name'];
+            $imageContent = addslashes(file_get_contents($image));
+
+            // Prepare an insert statement
+            $query = "INSERT INTO Items (UserID, Type, Title, Description, Image) VALUES ('$userID', '$type', '$title', '$description', '{$imageContent}')";
+
+            if (mysqli_query($dbc, $query)) {
+                echo "Item posted successfully.";
+            } else {
+                echo "Error: " . mysqli_error($dbc);
+            }
+        }
     }
 
-    // Prepare an insert statement
-    $query = "INSERT INTO Items (UserID, Type, Title, Description, Image) VALUES ('$userID', '$type', '$title', '$description', '{$imageContent}')";
-
-    if (mysqli_query($dbc, $query)) {
-        echo "Item posted successfully.";
-    } else {
-        echo "Error: " . mysqli_error($dbc);
-    }
 }
 
 // End output buffering and flush output
@@ -53,8 +59,11 @@ ob_end_flush();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post an Item</title>
     <link rel="stylesheet" href="./assets/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/common.css">
 </head>
 <body>
+    <?php include 'navbar.php'; ?>
+    
     <div class="container">
         <h2 class="mt-5">Post an Item</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
