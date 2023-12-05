@@ -24,7 +24,11 @@ This is a web application for lost and found items. Users can post items that th
 Install Docker: https://docs.docker.com/get-docker/  
 Install Docker Compose: https://docs.docker.com/compose/install/
 
-2. Run the following commands:
+2. Create database and tables
+
+Check out the `db/README.md` file for instructions.
+
+3. Run the following commands:
 
 ```bash
 # Go to the project directory:
@@ -36,6 +40,17 @@ $ docker-compose -f docker-compose.prod.yml up -d
 ```
 
 ## 4. Run the project (development) with Docker
+
+1. Install Docker and Docker Compose
+
+Install Docker: https://docs.docker.com/get-docker/  
+Install Docker Compose: https://docs.docker.com/compose/install/
+
+2. Create database and tables
+
+Check out the `db/README.md` file for instructions.
+
+3. Run the following commands:
 
 ```bash
 # Build and run the docker container in detached mode
