@@ -1,0 +1,41 @@
+# Name of the GitHub Action workflow.
+name: Build and Push Docker Images
+
+# Defines the event that triggers this workflow.
+on:
+  # The workflow will be triggered when there's a push event.
+  push:
+    # Run the workflow only for the following branches.
+    branches:
+      - main
+      - dev
+
+# Define the jobs to be executed in this workflow.
+jobs:
+  # Define the job name.
+  build_docker_image:
+    # Specifies the type of runner that the job will run on.
+    runs-on: ubuntu-20.04
+
+    # A job contains a sequence of tasks called 'steps'. 
+    steps:
+    # First step: Checkout the code from the current repo.
+    - name: Checkout code
+      uses: actions/checkout@v3  # Uses GitHub's official checkout action.
+
+    # Second step: Login to DockerHub.
+    - name: Login to DockerHub
+      uses: docker/login-action@v2  # Uses Docker's official login action.
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}  # Fetch the username from the repository's secrets.
+        password: ${{ secrets.DOCKERHUB_TOKEN }}     # Fetch the token/password from the repository's secrets.
+
+    # Third step: Build and push the Docker image to DockerHub.
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4  # Uses Docker's official build and push action.
+      with:
+        context: .  # Sets the build context to the current directory.
+        push: true  # Pushes the image to DockerHub.
+        # Tag Docker image as 'latest' when pushing to 'main' branch
+        # Tag Docker image as 'dev' when pushing to 'dev' branch
+        tags: qingquanli/lost-and-found:${{ github.ref == 'refs/heads/main' && 'latest' || (github.ref == 'refs/heads/dev' && 'dev') }}

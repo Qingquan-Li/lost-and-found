@@ -1,22 +1,46 @@
 # Lost and Found
 
-## Run Docker
+## 1. About the project
 
-Install Docker: https://docs.docker.com/get-docker/
+This is a web application for lost and found items. Users can post items that they have lost or found. Other users can comment on the items. The application is built with PHP and MySQL.
+
+## 2. Tech Stack
+
+- Frontend:
+  - Language: HTML, CSS, JavaScript
+  - Framework: Bootstrap 5
+- Backend:
+  - Language: PHP
+  - Web Server: Apache
+  - Database: MySQL
+- DevOps:
+  - Docker
+  - Docker Compose
+
+## 3. Run the project (production) with Docker
+
+1. Install Docker and Docker Compose
+
+Install Docker: https://docs.docker.com/get-docker/  
 Install Docker Compose: https://docs.docker.com/compose/install/
 
-```bash
-# Start Docker (build and run the docker container)
-$ docker-compose up -d
+2. Run the following commands:
 
-# Stop Docker (stop and remove the docker container)
-$ docker-compose down
+```bash
+# Go to the project directory:
+$ cd path/to/lost-and-found
+# Pull the latest images specified in docker-compose.prod.yml:
+$ docker-compose -f docker-compose.prod.yml pull
+# Run the containers with Docker Compose in detached mode:
+$ docker-compose -f docker-compose.prod.yml up -d
 ```
 
-## Connect to MySQL in the command line (terminal)
+## 4. Run the project (development) with Docker
 
 ```bash
-# Connect to the docker container
-$ docker-compose exec db bash
-$ mysql -u root -p
+# Build and run the docker container in detached mode
+$ docker-compose up -d
+# The project now is running on http://localhost
+# Stop Docker (stop and remove the docker container)
+$ docker-compose down
 ```

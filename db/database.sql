@@ -1,0 +1,35 @@
+CREATE DATABASE lost_and_found;
+USE lost_and_found;
+
+CREATE TABLE Users (
+    UserID INT NOT NULL AUTO_INCREMENT,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Username VARCHAR(50) NOT NULL,
+    RegistrationTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (UserID),
+    UNIQUE (Email)
+);
+
+CREATE TABLE Items (
+    ItemID INT NOT NULL AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    Type ENUM('lost', 'found') NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Description Text,
+    Image MEDIUMBLOB,
+    PostTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (ItemID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Comments (
+    CommentID INT NOT NULL AUTO_INCREMENT,
+    ItemID INT NOT NULL,
+    UserID INT NOT NULL,
+    CommentText Text NOT NULL,
+    CommentTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (CommentID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
