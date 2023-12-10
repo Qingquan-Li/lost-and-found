@@ -1,4 +1,4 @@
-# Create MySQL Tables for the Application
+# Create a MySQL database and tables for the project
 
 ## Lost and Found - Entity-Relationship Diagram (ERD)
 
@@ -23,6 +23,7 @@ $ mysql -u root -p
 
 Excute the SQL statements in the file `db/database.sql` to create the database and tables.
 
+After creating the database and tables, you can check them with the following commands:
 
 ```bash
 mysql> SHOW DATABASES;
@@ -52,12 +53,6 @@ mysql> SHOW TABLES;
 ```
 
 ## Backup and Restore the Database
-
-```bash
-# Backup the database
-$ docker-compose exec db bash
-$ mysqldump -u root -p lost_and_found > lost_and_found.sql
-```
 
 ```bash
 # Backup the database to a backup file

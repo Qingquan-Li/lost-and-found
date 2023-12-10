@@ -16,6 +16,8 @@ jobs:
   build_docker_image:
     # Specifies the type of runner that the job will run on.
     runs-on: ubuntu-20.04
+    # Runs only if the GitHub repository is 'qingquan-li/lost-and-found'.
+    if: github.repository == 'qingquan-li/lost-and-found'
 
     # A job contains a sequence of tasks called 'steps'. 
     steps:
