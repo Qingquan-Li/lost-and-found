@@ -91,7 +91,7 @@ ob_end_flush();
                 ></textarea>
             </div>
             <div class="mb-3">
-                <label>Item image</label>
+                <label>Item image (size < 1MB)</label>
                 <input type="file" name="image" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Post</button>
