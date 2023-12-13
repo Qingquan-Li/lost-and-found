@@ -39,9 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $query = "INSERT INTO Items (UserID, Type, Title, Description, Image) VALUES ('$userID', '$type', '$title', '$description', '{$imageContent}')";
 
             if (mysqli_query($dbc, $query)) {
-                echo "Item posted successfully.";
+                // echo "Item posted successfully.";
+                // Bootstrap alert
+                echo "<div class='alert alert-success' role='alert'>"
+                    . "Item posted successfully. "
+                    . "<a href='index.php'>Click here to go to the home page</a>"
+                    . "</div>";
             } else {
-                echo "Error: " . mysqli_error($dbc);
+                echo "<div class='alert alert-danger' role='alert'>"
+                    . "Error: " . mysqli_error($dbc)
+                    . "</div>";
             }
         }
     }
@@ -91,8 +98,8 @@ ob_end_flush();
                 ></textarea>
             </div>
             <div class="mb-3">
-                <label>Item image (size < 1MB)</label>
-                <input type="file" name="image" class="form-control">
+                <label>Item image (size < 1MB) *</label>
+                <input type="file" name="image" class="form-control" accept="image/*" required>
             </div>
             <button type="submit" class="btn btn-primary">Post</button>
         </form>

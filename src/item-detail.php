@@ -69,6 +69,7 @@ if (isset($_GET['item_id'])) {
                     echo "<img
                         src='data:image/jpeg;base64,".base64_encode($item['Image'])."'
                         class='img-thumbnail'
+                        style='width: 350px;'
                     />";
                 }
                 echo "<p>" . htmlspecialchars($item['Description']) . "</p>";

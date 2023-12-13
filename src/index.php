@@ -31,6 +31,7 @@ $result = mysqli_query($dbc, $query);
                     echo "<img
                         src='data:image/jpeg;base64,".base64_encode($row['Image'])."'
                         class='img-thumbnail'
+                        style='width: 200px;'
                     />";
                 }
                 echo "<p class='card-text'>" . htmlspecialchars($row['Description']) . "</p>";
